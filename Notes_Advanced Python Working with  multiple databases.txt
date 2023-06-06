@@ -1,0 +1,349 @@
+A database is an organized collection of data stored and accessed electronically. Databases are designed to offer an efficient way to store, retrieve and manage information.
+
+The data in a database is typically organized into tables consisting of rows and columns. Each row in a table represents a unique record (or entry), and each column in a table represents a certain field (or attribute) of data. For instance, a database for a business might have a table for "Customers", where each row represents a different customer, and columns could include information like "CustomerID", "Name", "Email", "Phone Number", etc.
+
+There are various types of databases:
+
+Relational Databases (RDBMS): These databases are organized into tables, with each table having a key field that links it to other tables. This model maintains data consistency and integrity. Examples include MySQL, PostgreSQL, Oracle Database, and SQL Server.
+
+Non-Relational Databases (NoSQL): These databases are designed to handle unstructured data, and they can store data in multiple ways: it could be column-oriented, document-oriented, graph-based or organized as a KeyValue store. Examples include MongoDB, Cassandra, Redis, and Neo4j.
+
+In-Memory Databases (IMDB): These databases reside in a computer’s main memory, instead of on a hard disk, which makes data access faster. Examples include Redis and Memcached.
+
+Cloud Databases: These are databases that are optimized or built for a virtualized environment, typically run on the cloud. Examples include Google Cloud Spanner, Amazon Aurora, and Microsoft Azure SQL.
+
+Object-oriented Databases (OODBMS): These databases store data in the form of objects, as in object-oriented programming. Examples include MongoDB and PostgreSQL (with extensions).
+
+Hierarchical Databases: Data is stored in a tree-like model and connected through parent/child relationships. IBM's Information Management System (IMS) is an example.
+
+Network Databases: They allow children to have multiple parents and are considered an evolution of hierarchical databases. An example is Integrated Data Store (IDS).
+
+Note that databases are managed using a database management system (DBMS). The DBMS provides users and programmers with a systematic way to create, retrieve, update, and manage data. The DBMS essentially serves as an interface between the database and end users or application programs, ensuring that data is consistently organized and remains easily accessible.
+
+Python Database API, also known as Python DB-API, is a standard for connecting Python programming language to various databases. It defines a set of methods, variables, and conventions that provide a consistent database interface, regardless of the underlying database being used.
+
+In Python, you use the DB-API by importing a specific database module, each of which is designed to connect to a specific database such as MySQL, SQLite, PostgreSQL, Oracle, etc. The most common methods and objects defined in DB-API are:
+
+Connection Objects: These are created using the connect() method of the database module. They represent a connection to a database.
+
+Cursor Objects: These are created using the cursor() method of the Connection object. They are used to execute SQL commands and queries on the database.
+
+Methods such as execute(), fetchone(), and fetchall(): These methods are used to run SQL commands and fetch results.
+
+Here is a simple example of how the DB-API could be used to connect to a SQLite database:
+
+import sqlite3
+# create a connection object 
+conn= sqlite3.connect()
+#create a cursor object 
+cursor = conn.cursor()
+
+#Execute SQL command 
+ cursor.execute (''' CREATE TABLE stocks 
+		  (date text, trans text, symbol text, qty real, price real) ''')
+
+#commit the transaction 
+conn.commit() 
+
+# close the connection
+conn.close() 
+
+
+
+
+
+
+In this example, sqlite3 is the database module for SQLite databases. A Connection object is created by calling sqlite3.connect(). A Cursor object is created from the Connection object, and SQL commands are executed with cursor.execute().
+
+Python DB-API is a powerful tool that allows Python programs to interact with databases in a consistent and Pythonic way.
+
+
+install python : 
+ python --version 
+mac : python3 --version 
+
+Tutorial uses : python 3.7.2 
+
+python shell: 
+	-- python /py 
+	-- exit() 
+
+
+Visual studio code : 
+	- Free Open source modern text editor	
+	- cross platform 
+	- Functionality can be extended with extensions 
+	- https://code.visualstudio.com/
+
+    - install an extension 
+	- paste and indent ( extension) g3rry
+
+
+Create a Project Directory & python file : 
+	- create  a folder : open with vscode 
+	- create a new file : mybooks.py 
+
+======================================
+2. Build an application wiht python 
+========================================
+2.1 What we will create
+2.2 The application Design Sketch 
+2.3 Creating The applicaiton GUI - Part  1
+	- GUI 
+	- Tkinter - Built-in Python module used to create GUI's
+	- Module - Python file containing Python definitions and statements. 
+			- variables, methods, classes 
+	- Import the modules are imported before using the module * 
+		- Not good practice to import entire module. 
+		- only import parts of the module needed. 
+		- ttk - Themed Tk Widget Library. 
+	- widgets - They are elements used to crate GUI eg., buttons, Labels etc. 
+
+Program : 
+    - from tkinter import Tk, Button, Label, Scrollbar, Listbox, StringVar, Entry, W,E,N,S, END
+    - from tkinter import ttk
+    - from tkinter import messagebox
+
+ root or window 
+	root = Tk()    => Creates an Application Window
+
+to Run the Application we need a loop ( Runs the application until you exit )
+	root.mainloop() 
+
+2.4 Creating The applicaiton GUI - Part  2
+-----------------------------------------------------
+- Add Title to application window
+- Add a background color to application window
+- Add a size for applicaiton window ( bydefault resizable)
+- Prevent application window from being resizable. 
+
+ root = Tk()
+root.title("My Books Database Application")
+root.configure(background="light green")
+ -- Geometry() method is used to set the dimensions of the tkinter application window. 
+root.geometry("850x500"), width, height,
+root.resizable(width=False,height=False)
+
+
+
+2.5 Creating The applicaiton GUI - Part  3
+-----------------------------------------------------
+- Add Lables for entry inputs
+- Position Lables inside the application window using grid() method
+- Add variable to store user inputs
+- Add and position entry input widgets
+
+-->Label widget inside the root object
+title_label = ttk.Label(root, text="title",background="Light green", font=("TkDefaultFont",16)  // ttk.Label
+	== the first row and column in a tkinter grid is zero 
+		-- West is considered as the Left of the window
+title_label.grid(row=0, column =0, sticky=W)
+
+  -- StringVar() from tkinter is used to monitor changes to tkinter variables and converts input captured to string(text value) 
+
+title_text= StringVar()
+title_entry = ttk.Entry(root, width=24, textvariable=title_text)   // ttk.Entry
+title_entry.grid(row=0,column=1,sticky=W)
+
+2.6 Creating The applicaiton GUI - Part  4
+-----------------------------------------------------
+
+-Add Buttons
+-Add a List Box
+-Add a Scrollbar
+-Add Widgets to application window using grid() method
+
+add_btn = Button(root, text="Add Book", bg="blue",fg="white",font="helvetica 10 bold", command="")
+add_btn.grid(row=0, column=6, sticky=W) 
+
+list_box = Listbox(root, height=16, width=40, font="helvetica 13", bg="light blue")
+list_box.grid(row=3, column=1, columnspan=14, sticky = W + E, pady=40, padx=15) 
+	- Regardless of the listbox width it will spacn the columns I have specified
+	- padx - horizontal spacing 
+	- pady - vertical spacing 
+
+scroll_bar = Scrollbar(root)
+scroll_bar.grid(row=1, column=8, rowspan=14, sticky=W)
+
+list_box.configure(yscrollcommand=scroll_bar.set)
+scroll_bar.configure(command=list_bx.yview)
+
+
+2.7 Creating The applicaiton GUI - Part  5
+-----------------------------------------------------
+
+modifyButton = Button(root, text="Modify Record", bg='purple', fg='white',font='helvetica 10 bold', command="")
+modifyButton.grid(row=15, column=4)
+
+deleteButton = Button(root, text="Delete Record", bg='red', fg='white',font='helvetica 10 bold', command="")
+deleteButton.grid(row=15, column=5)
+
+viewButton = Button(root, text="View all Records", bg='black', fg='white',font='helvetica 10 bold', command="")
+viewButton.grid(row=15, column=1)
+
+clearButton = Button(root, text="Clear Screen", bg='maroon', fg='white',font='helvetica 10 bold', command="")
+clearButton.grid(row=15, column=2)
+
+exitButton = Button(root, text="Exit Application", bg='blue', fg='white',font='helvetica 10 bold', command="")
+exitButton.grid(row=15, column=3)
+
+
+
+
+=====================================================
+3::3. Python and Microsoft SQL Server  Database Interaction
+============================================================
+3.1. Download SQL Server
+---------------------
+Download Microsoft SQL Server Developer Edition 2019 
+  - microsoft.com/en-us/sql-server/sql-server-downloads
+	- Developer Edition ( download the software )
+  - create a folder ( SQL SERVER 2019 DOWNLOAD )
+  - Download Media 
+  - ISO , Select the folder created above
+  - Downloaded the file in the specified directory. 
+
+3.2. Install SQL Server
+------------------------
+  - open the setup file 
+  - click on System Configuration Checker 
+   	- check the report 
+  - New SQL Server Standalone installation or add features to an existing installation 
+  - Feature Selection 
+	- Database Engine Services 
+  - INSTANCE CONFIGURATION( Named instance : SQLSERVER2019), (INSTANCE id )  >>
+  - SERVER CONFIGURATION 
+  - Database Engine Configuration  
+	- Mixed Mode ( Password : admin1234) 
+  	- add current user 
+=====================================INSTALL=========================================
+  - CHECK the installation in Windows Menu ( Microsoft SQL Server 2019 )
+
+
+
+3.3. Install SQL Server Management Studio - SSMS
+--------------------------------------------------
+ - SQL Server Management Studio is an IDE that provides a Graphical interface for connecting and working with MS SQL Server.
+ - It is a free tool provided by Microsoft to manage SQL Servers. 
+ - Used by Professionals like database administrators and developers. 
+ - Used to access, configure, manage, administer and develop all components of SQL Server. 
+
+Download and Install 
+  - Programs Menu > SQL Server 2019  >SQL Server 2019 installation Center 
+	> installation > Install SQL Server Management Tools > Download SSMS
+                   Free Download for SQL Server Management Studio (SSMS) 19.1 > Download 
+	- I copy the installer into a folder ( SQL SERVER 2019 DOWNLOAD ) &  install  SSMS-Setup-ENU
+
+  - select the default directory , just install 
+  - Windows > MS SQL Server Tools > SQL Server Management Studio 19 (click to start)
+
+3.4. Connect SSMS to SQL Server
+----------------------------------------
+ - Windows > Microsoft SQL Server Tools 19 > MS Server Management Studio > 
+    - SQL Server Window ( Connect > Database Engine )
+	- In the connect to Server Window for the server type select Database Engine ( This is usually the default option )
+ - You can also use SQL Server Authentication which you have to supply a username and password differen from your windows account ( Select Server Name , Authentication : Windows Authentication , Connect )
+
+ - To Disconnect : RC on Database Serve > Disconnect 
+ - To exit from the SQL Server Management Studio > close the window
+
+3.5. Create a new database and table
+--------------------------------------
+SSMS : SQL Server Management Studio tool Built into MS SQL Server 
+
+CREATE database books_db ;
+CREATE table books (id int IDENTITY(1,1), title varchar(255), author varchar(255), isbn int) ; 
+
+
+1. Open : MS SQL Management Studio 
+2. Connect to the Database Engine: 
+3. Create a Database : GUI ( can create )
+4. Create a Query windows : 
+	press + , to see all databases, to know about the databases.
+	in the query window : create database mybooks;
+   - refresh the database list . 
+5. create a table inside the  mybooks database. 
+  - use mybooks ;
+  -CREATE table books (id int PRIMARY KEY IDENTITY(1,1), title varchar(255), author varchar(255), isbn int) ; 
+
+NOTE NOTE : in the panel find database selection option is available : CAREFUL, CAREFUL 
+  - otherwise you can choose use mybooks ; command to make mybooks active database
+
+Note : Identity columns can be used for generating key values. The identity property on a column makes each new value generated based on the current seed and increment. Each new value for a particular transaction is different from other concurrent transactions on the table. 
+   
+     The Identity seed is the value that is used for the very fast row loaded into the table. The incremental value is what is added to the previous row that was loaded. 
+
+   dbo.books ( database owner. books ) table in the mybooks database.
+
+
+3.6. Create a database configuration file for the database : 
+------------------------------------------------------------
+
+Create a config file for the database: 
+  - Driver 
+  - Server
+  - Database 
+  - username 
+  - Password 
+
+
+MS Management studio: 
+   - Properties of the Database Server : 
+	-  Database Server, Database Name, UserName, Windows Password, 
+
+ - Create a new python file for configuration files. 
+    Same directory of the application : 
+	- sqlserver_config.py ( )
+ - a Dictionary is a collection which is unordered, changeable and indexed. in python dictionaries are written with curly brackets, and they have keys and values. 
+    
+   dbConfig = 	{ 
+
+		  'driver' : 'SQL Server',
+		  'Server' : 'DESKTOP-BSH688M\SQLSERVER2019',
+		  'Database' : "mybooks" ,
+		  'username' : 'DESKTOP-BSH688M' ,
+		  'password' :  ''
+   		}
+  
+driver : connects to the database server engine, 
+server : 
+database : 
+
+
+3.7. Install Python SQL Server Connector
+-------------------------------------------
+ - install Pypyodbc 
+
+ODBC: standard API for accessing DBMS, 
+use PIP to install 
+
+Install Virtual Environment :
+A Virtual environment is a tool that helps to keep dependencies required by different projects separate by creating isolated python virtual environment for them. This is one of the most important tools that most of the Python developers use.
+
+Make sure you cd to your project directory: ( download the virtualenv module )
+	pip install virtualenv (Windows)
+	sudo pip install virtualenv (mac and linux )
+
+if already on your computer it will abort the installation and tell you. 
+
+create an isolated virtual environment : 
+	- Make sure you are in your project directory. 
+		virtualenv myenv
+
+Create a Virtual Environment : 
+ 	virtualenv sqlserverenv 
+
+To activate the virtual environment : 
+	Folder > sqlserverenv > Scripts > activate (run)
+ > cd sqlserverenv/scripts 
+ > source activate
+
+
+Installing Pypyodbc : 
+	- pypyodbc is a cross platform interface module. 
+	- install inside the virtual environment
+		-pip install pypyodbc
+
+ 
+
+
